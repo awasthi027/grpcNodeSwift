@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+message GreetingMessage {
+    string message = 1;
+}
+
+message GreetingInput {
+    string name = 1;
+}
+
+message Empty {}
+
+message SampleNote {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+}
+
+message Note {
+    string id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message NoteList {
+    repeated Note notes = 1;
+}
+
+message NoteInput {
+    string id = 1;
+}
+
+
+service NoteService {
+    rpc Greeting (GreetingInput) returns (GreetingMessage) {}
+    rpc GetSampleNote (Empty) returns (SampleNote) {}
+    rpc GetNotes (Empty) returns (NoteList) {}
+    rpc AddNote (Note) returns (Note) {}
+    rpc DeleteNote (NoteInput) returns (Empty) {}
+    rpc EditNote (Note) returns (Note) {}
+}
