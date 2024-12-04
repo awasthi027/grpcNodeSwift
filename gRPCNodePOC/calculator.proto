@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+
+service CalService {
+
+// Unary RPC method
+rpc AddNum (AddRequest) returns (AddResponse) {};
+// Server Streaming RPC method
+rpc FiboSeries (FiboRequest) returns (stream FiboResponse) {};
+// Client Streaming RPC method
+rpc ComputeAverage (stream ComputeAverageRequest) returns (ComputeAverageResponse){};
+// Bidirectional Streaming RPC method
+rpc FindMaximum (stream FindMaximumRequest) returns (stream FindMaximumResponse){};
+
+}
+
+message AddRequest {
+   int32 first_number = 1;
+   int32 second_number = 2;
+}
+
+message AddResponse {
+   int32 sum_result = 1;
+}
+
+message FiboRequest {
+   int64 num = 1;
+}
+
+message FiboResponse {
+    int64 num = 1;
+}
+
+message ComputeAverageResponse {
+   double average = 1;
+}
+
+message ComputeAverageRequest {
+   int32 number = 1;
+}
+
+message FindMaximumRequest {
+   int32 number = 1;
+}
+
+message FindMaximumResponse {
+  int32 maximum = 1;
+}
