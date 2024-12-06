@@ -135,8 +135,8 @@ server.addService(calProto.CalService.service, {
     }
     call.end();
   },
-  // collect client response 
 
+  // collect client Request, Client Stream 
   ComputeAverage: (call, callback) => {
 
       var items = [];
@@ -153,7 +153,20 @@ server.addService(calProto.CalService.service, {
     });
   },
 
-  
+ // server and client stream
+ FindMaximum: (call) => {
+      var items = [];
+      call.on('data',function(numberRequest) {
+            let num = numberRequest.number;
+            items.push(num);
+            let largest = items.sort((a,b)=>a-b).reverse()[0];
+            call.write({ maximum: largest } );
+      });
+
+     call.on('end',function() { 
+        call.end();
+    });
+  },
 
 });
 

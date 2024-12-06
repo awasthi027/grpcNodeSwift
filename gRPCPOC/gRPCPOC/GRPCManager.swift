@@ -15,23 +15,28 @@ class GRPCManager {
 
     private let group = PlatformSupport.makeEventLoopGroup(loopCount: 1)
     static let shared = GRPCManager()
-    private let client: NoteServiceAsyncClient?
+    private let noteService: NoteServiceAsyncClient?
+    public let calService: CalServiceAsyncClient?
 
     //"127.0.0.1:3500"
     // Making connection to local host
     private init() {
         let channel = ClientConnection(configuration: .default(target: ConnectionTarget.hostAndPort("127.0.0.1", 3500),
                                                                eventLoopGroup: group))
-        self.client = NoteServiceAsyncClient(channel: channel)
+        self.noteService = NoteServiceAsyncClient(channel: channel)
+        self.calService = CalServiceAsyncClient(channel: channel)
     }
+}
+
+// Notes service call
+extension GRPCManager {
 
     func greetingMessage() async -> String {
-
         let calloption = CallOptions(eventLoopPreference: .indifferent)
            // Make the RPC call to the server.
         var greetingInput = GreetingInput()
         greetingInput.name = "Ashish Awasthi"
-        let greetingMessage = try? await self.client?.greeting(greetingInput,
+        let greetingMessage = try? await self.noteService?.greeting(greetingInput,
                                                       callOptions: calloption)
         guard let message = greetingMessage?.message else { return "" }
         return message
@@ -40,7 +45,7 @@ class GRPCManager {
     func listOfNotes() async -> [Note] {
         let calloption = CallOptions(eventLoopPreference: .indifferent)
            // Make the RPC call to the server.
-        let notesList = try? await self.client?.getNotes(Empty(), callOptions: calloption)
+        let notesList = try? await self.noteService?.getNotes(Empty(), callOptions: calloption)
         guard let notes = notesList?.notes else { return [] }
         return notes
     }
@@ -48,7 +53,7 @@ class GRPCManager {
     func addNote(newNode: Note) async -> Note? {
         let calloption = CallOptions(eventLoopPreference: .indifferent)
            // Make the RPC call to the server.
-        let addNode = try? await self.client?.addNote(newNode,
+        let addNode = try? await  self.noteService?.addNote(newNode,
                                                       callOptions: calloption)
         guard let note = addNode else { return nil }
         return note
@@ -57,9 +62,10 @@ class GRPCManager {
     func editNote(newNode: Note) async -> Note? {
         let calloption = CallOptions(eventLoopPreference: .indifferent)
            // Make the RPC call to the server.
-        let addNode = try? await self.client?.editNote(newNode,
+        let addNode = try? await self.noteService?.editNote(newNode,
                                                       callOptions: calloption)
         guard let note = addNode else { return nil }
         return note
     }
 }
+

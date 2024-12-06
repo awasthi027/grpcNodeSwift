@@ -13,7 +13,7 @@ enum NotesListOption: Int {
 
 struct NotesListView: View {
 
-    @StateObject var viewModel = NotesViewModel()
+   @StateObject var viewModel = NotesViewModel()
 
     var body: some View {
         VStack {
@@ -30,7 +30,7 @@ struct NotesListView: View {
                 }
             }
             Button {
-
+              
             } label: {
                 NavigationLink(value: NotesListOption.addNote) {
                     Text("Add Note")

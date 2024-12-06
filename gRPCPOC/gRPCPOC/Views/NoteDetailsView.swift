@@ -17,7 +17,9 @@ struct NoteDetailsView: View {
 
             VStack {
                 TextField("Enter note title", text: self.$content.title)
+                    .textFieldStyle(.roundedBorder)
                 TextField("Enter note description", text:  self.$content.content)
+                    .textFieldStyle(.roundedBorder)
             }
             .padding()
             Button("Add Note") {
