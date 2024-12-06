@@ -18,10 +18,12 @@ struct AddNoteView: View {
         VStack {
             VStack {
                 TextField("Enter note title", text: self.$noteTitle)
+                    .textFieldStyle(.roundedBorder)
                 TextField("Enter note description", text: self.$noteDescription)
+                    .textFieldStyle(.roundedBorder)
             }
             .padding()
-            Button("Add Note") {
+            Button("Add Number") {
                 Task {
                     var newNode = Note()
                     newNode.title = self.noteTitle
@@ -29,8 +31,8 @@ struct AddNoteView: View {
                     await self.model.addNote(newNode: newNode)
                 }
             }
-            Spacer()
             Text("Id: \(self.model.addedNewNote.id)\nTitle: \(self.model.addedNewNote.title)\nDecription: \(self.model.addedNewNote.content)")
+            Spacer()
 
         }
     }

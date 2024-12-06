@@ -8,7 +8,8 @@
 import SwiftUI
 
 enum HomeNavigationOption: Int {
-    case noteList
+    case noteService
+    case calculatorService
 }
 
 struct HomeView: View {
@@ -22,8 +23,15 @@ struct HomeView: View {
             Button {
 
             } label: {
-                NavigationLink(value: HomeNavigationOption.noteList) {
-                    Text("Notes List")
+                NavigationLink(value: HomeNavigationOption.noteService) {
+                    Text("Notes Service Requests")
+                }
+            }
+            Button {
+
+            } label: {
+                NavigationLink(value: HomeNavigationOption.calculatorService) {
+                    Text("Calculator Service Requests")
                 }
             }
         }
@@ -35,8 +43,10 @@ struct HomeView: View {
         }
         .navigationDestination(for: HomeNavigationOption.self) { item in
             switch item {
-            case .noteList:
+            case .noteService:
                 NotesListView()
+            case .calculatorService:
+                CalculatorServicesView()
             }
         }
         .navigationDestination(for: Note.self) { item in
