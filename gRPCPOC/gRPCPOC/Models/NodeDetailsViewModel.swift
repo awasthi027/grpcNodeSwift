@@ -17,4 +17,11 @@ class NodeDetailsViewModel: ObservableObject {
             self.addedNewNote = note
         }
     }
+    
+    func deleteNode(nodeId: String) async  {
+        await GRPCManager.shared.deleteNote(nodeId: nodeId)
+        DispatchQueue.main.async {
+            self.addedNewNote =  Note()
+        }
+    }
 }

@@ -13,7 +13,8 @@ class CalculatorServicesViewModel: ObservableObject {
     @Published var sumResult: Int32 = 0
     @Published var fibonacciNumbersStr: String = ""
     @Published var averageOfNumbers: Double = 0
-    @Published var maxFromGivenNumber: Int32 = 0
+    @Published var maxFromGivenNumbers: [String] = []
+
 
     func addNumber(firstNumber: String,
                    secondNumber: String) async {
@@ -80,9 +81,8 @@ class CalculatorServicesViewModel: ObservableObject {
         }
     }
 
-    func findMaximumNumber()  {
-
-        let number = "1,8,9,4"
+    func findMaximumNumber(number: String)  {
+        self.maxFromGivenNumbers = []
         let numbers = number.components(separatedBy: ",")
         // Create an AsyncStream of ComputeAverageRequest
         let requestStream = AsyncStream<FindMaximumRequest> { continuation in
@@ -101,10 +101,9 @@ class CalculatorServicesViewModel: ObservableObject {
             var responseStream = call?.makeAsyncIterator()
             while let response = try await responseStream?.next() {
                 DispatchQueue.main.async {
-                    print("response.maximum: \(response.maximum)")
+                    self.maxFromGivenNumbers.append("response.maximum: \(response.maximum)")
                 }
             }
         }
     }
-
 }

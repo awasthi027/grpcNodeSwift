@@ -67,5 +67,14 @@ extension GRPCManager {
         guard let note = addNode else { return nil }
         return note
     }
+
+    func deleteNote(nodeId: String) async  {
+        var deleteNode = NoteInput()
+        deleteNode.id = nodeId
+        let calloption = CallOptions(eventLoopPreference: .indifferent)
+           // Make the RPC call to the server.
+        let _ = try? await self.noteService?.deleteNote(deleteNode,
+                                                              callOptions: calloption)
+    }
 }
 

@@ -48,6 +48,6 @@ struct NotesListView: View {
 struct ContentViewRow: View {
     let model: Note
     var body: some View {
-        Text("Title: \(model.title))")
+        Text("Title: \(model.title)")
     }
 }

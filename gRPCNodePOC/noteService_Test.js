@@ -1,6 +1,6 @@
 const client = require("./noteServiceClient");
 
-// make request to print sample note
+make request to print sample note
  client.GetSampleNote({}, (error, sampleNote) => {
   if (error) {
     console.log(error);
@@ -16,8 +16,8 @@ client.Greeting({name: "Ashish"}, (error, respnse) => {
   } else {
     console.log(respnse);
   }
-}) */
-/*
+}) 
+
 // make request to get all notes
 client.GetNotes({}, (error, respnse) => {
   if (error) {

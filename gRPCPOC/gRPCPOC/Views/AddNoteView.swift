@@ -23,7 +23,7 @@ struct AddNoteView: View {
                     .textFieldStyle(.roundedBorder)
             }
             .padding()
-            Button("Add Number") {
+            Button("Add Note") {
                 Task {
                     var newNode = Note()
                     newNode.title = self.noteTitle
@@ -32,6 +32,10 @@ struct AddNoteView: View {
                 }
             }
             Text("Id: \(self.model.addedNewNote.id)\nTitle: \(self.model.addedNewNote.title)\nDecription: \(self.model.addedNewNote.content)")
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding()
+                .font(.headline)
+
             Spacer()
 
         }

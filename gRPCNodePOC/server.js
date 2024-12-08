@@ -78,8 +78,8 @@ server.addService(noteProto.NoteService.service, {
 
   // Add new note 
   AddNote: (input, callback) => {
-    let newId = autoGenerateNoteId();
-    const _note = { id: newId, title: input.request.title, content: input.request.content };
+    const newId = autoGenerateNoteId().toString();
+    const _note = {id: newId, title: input.request.title, content: input.request.content };
     notes.push(_note);
     callback(null, _note);
   },
@@ -88,7 +88,8 @@ server.addService(noteProto.NoteService.service, {
   DeleteNote: (input, callback) => {
     const noteId = input.request.id;
    //removeing item
-    notes = notes.filter(item => item.id !== noteId);
+    let items = notes.filter(item => item.id !== noteId);
+    notes = items;
     callback(null, {});
   },
   
@@ -103,7 +104,7 @@ server.addService(noteProto.NoteService.service, {
 
 });
 
-// Implement NoteService
+// Register calculator service
 server.addService(calProto.CalService.service, {
  // Basic sample request to Add Sum
   AddNum: (input, callback) => {
