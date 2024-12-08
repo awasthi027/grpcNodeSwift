@@ -20,16 +20,12 @@ struct HomeView: View {
         VStack {
             Text(self.model.greetingMessage)
                 .font(.headline)
-            Button {
-
-            } label: {
+            Button { } label: {
                 NavigationLink(value: HomeNavigationOption.noteService) {
                     Text("Notes Service Requests")
                 }
             }
-            Button {
-
-            } label: {
+            Button {} label: {
                 NavigationLink(value: HomeNavigationOption.calculatorService) {
                     Text("Calculator Service Requests")
                 }

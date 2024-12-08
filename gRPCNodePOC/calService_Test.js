@@ -1,5 +1,5 @@
 const client = require("./calServiceClient");
-/*
+
 // sample request to add number
 client.AddNum(
   {
@@ -10,22 +10,18 @@ client.AddNum(
     if (error) throw error;
     console.log(`Sum:  ${response.sum_result}`);
   }
-); */
+); 
 
-
-/*
 // Server stream call 
  let serverStreamCall = client.FiboSeries({ num: 8});
   serverStreamCall.on('data',function(response) {
-    console.log(response.num);
+ console.log(`Series Number: ${response.num}`);
   });
 
   serverStreamCall.on('end',function(){
     console.log('fibonacci calculation has been completed');
   });
-*/
 
-/*
 // client stream call 
 let clientStreamCall = client.ComputeAverage({},
   (error, response) => {
@@ -40,7 +36,7 @@ clientStreamCall.write({number: 3});
 clientStreamCall.write({number: 10});
 clientStreamCall.write({number: 12});
 clientStreamCall.end();
-*/
+
 
 
 // Client and server stream 
@@ -49,7 +45,7 @@ let serverAndClientSteamCall = client.FindMaximum({})
      console.log(`Maximum Number:  ${response.maximum}`);
   });
 
-  serverAndClientSteamCall.on('end',function(){
+  serverAndClientSteamCall.on('end',function() {
     console.log('Find Maximum Number call has been end');
   });
 

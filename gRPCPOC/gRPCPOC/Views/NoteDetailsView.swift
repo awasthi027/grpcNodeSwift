@@ -22,9 +22,14 @@ struct NoteDetailsView: View {
                     .textFieldStyle(.roundedBorder)
             }
             .padding()
-            Button("Add Note") {
+            Button("Edit Note") {
                 Task {
                     await self.model.editNote(newNode: self.content)
+                }
+            }
+            Button("Delete Note") {
+                Task {
+                    await self.model.deleteNode(nodeId: self.content.id)
                 }
             }
             Spacer()
